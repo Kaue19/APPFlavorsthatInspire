@@ -1,20 +1,17 @@
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity} from "react-native"
- export default function Detalhe({setDetalhe}){
+ export default function Detalhe({item, setDetalhe}){
     return(
         <View>
-            <Image style={styles.imagem} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUolMg5w_g-cO1L0-gkIprx06vxoS8fM88OA&usqp=CAU'}} />
+            <Image style={styles.imagem} source={{ uri: item.produtoFoto}} />
             <View >
-            <Text style={styles.text}>Ingredientes:</Text>
-            <Text style={styles.text}>* Carne moída de boa qualidade</Text>
-            <Text style={styles.text}>* Pão de hambúrguer</Text>
-            <Text style={styles.text}>* Queijo</Text>
-            <Text style={styles.text}>* Presunto, bacon </Text>
-            <Text style={styles.text}>* Legumes: tomate, cebola, alface</Text>
-            <Text style={styles.text}>* Molhos: maionese, ketchup, mostarda, barbecue</Text>
-            <Text style={styles.text}>R$: 14,90 </Text>
+            <Text style={styles.text}>{item.produtoNome}</Text>
+            <Text style={styles.text}>{item.produtoDescricao}</Text>
+            <Text style={styles.text}>R$: {item.produtoPreco}</Text>
+            <Text style={styles.text}>{item.CategoriaId}</Text>
+            <Text style={styles.text}>DESCONTO - R$: {item.produtoDesconto}</Text>
             </View>
             <TouchableOpacity style={styles.btn}>
-                 <Text style={styles.btnText} onPress={() => setDetalhe( false )}>FECHAR</Text>
+                 <Text style={styles.btnText} onPress={() => { setDetalhe( false ); setDetalhe( false ) }}>FECHAR</Text>
             </TouchableOpacity>
         </View>
     )
@@ -43,6 +40,6 @@ const styles = StyleSheet.create({
         marginLeft: '35%',
         borderWidth: 1,
         borderRadius: 10,
-        marginTop: '5%'
+        marginTop: '25%'
       },
 })

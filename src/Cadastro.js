@@ -1,15 +1,13 @@
 import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image } from "react-native"
 
-export default function Cadastro({ setLogado, setCadastro }) {
+export default function Cadastro({ setCadastro }) {
 
     function Cadastrar() {
         setCadastro(false);
-        setLogado(false);
     }
 
     function Voltar() {
         setCadastro(false);
-        setLogado(false);
     }
     return (
         <View style={styles.Container}>

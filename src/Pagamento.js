@@ -4,6 +4,8 @@ import Carrinho from "./Carrinho";
 
 export default function Pagamento() {
 
+    
+
     const onPagamentoConcluido = () => {
         Alert.alert(
           'Pagamento Concluído!',
@@ -21,12 +23,11 @@ export default function Pagamento() {
 
     return (
         <View>
-            <TouchableOpacity style={styles.btn}>
-                 <Text style={styles.btnText} onPress={()=> setdetalhesdopedido(true)}>Detalhes do Pedido</Text>
-            </TouchableOpacity>
-            <Text style={styles.Textovalor}>Valor Total: 0</Text>
             <View style={styles.caixa}>
                 <Image source={require("../assets/qrcode.jpg")} style={styles.imagem} />
+                <TouchableOpacity style={styles.btn}>
+                 <Text style={styles.btnText} onPress={()=> setdetalhesdopedido(true)}>Detalhes do Pedido</Text>
+            </TouchableOpacity>
                 <TouchableOpacity style={styles.btn2}>
                     <Text style={styles.btnText2}>Copiar Código Pix</Text>
                 </TouchableOpacity>
@@ -48,26 +49,26 @@ export default function Pagamento() {
 const styles = StyleSheet.create({
     caixa: {
         width: '90%',
-        height: 590,
+        height: 620,
         borderWidth: 1,
         padding: 15,
         borderRadius: 15,
-        marginTop: 20,
+        marginTop: 15,
         marginLeft: 15,
     },
     btn: {
-        width: '30%',
-        height: 55,
+        width: 150,
+        height: 40,
         borderRadius: 15,
-        marginTop: 2,
+        marginTop: -90,
         borderWidth: 1,
-        marginLeft: '60%'
+        marginLeft: 150,
     },
     btnText: {
         fontSize: 12,
         fontWeight: "bold",
         textAlign: "center",
-        lineHeight: 50,
+        lineHeight: 30,
     },
     Textovalor: {
         fontSize: 20,
@@ -86,18 +87,19 @@ const styles = StyleSheet.create({
     },
     btn2: {
         width: 150,
-        height: 55,
+        height: 40,
         borderRadius: 15,
-        marginTop: -70,
+        marginTop: 10,
         borderWidth: 1,
         marginLeft: 150,
-        backgroundColor: '#DBB739'
+        backgroundColor: '#E6954A'
     },
     btnText2: {
         fontSize: 12,
         fontWeight: "bold",
         textAlign: "center",
         lineHeight: 50,
+        lineHeight: 30,
     },
     input: {
         width: '90%',
@@ -118,12 +120,12 @@ const styles = StyleSheet.create({
     btn3: {
         width: '70%',
         height: 40,
-        backgroundColor: '#DB7861',
+        backgroundColor: '#F5C185',
         borderRadius: 15,
         borderWidth: 1,
         marginLeft: 45,
         textAlign: 'center',
-        marginTop: 10
+        marginTop: 20,
     },
     btnText3: {
         fontSize: 12,

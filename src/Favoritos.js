@@ -1,13 +1,9 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 
-export default function Reclamacoes() {
+export default function Favoritos() {
   return (
     <View style={styles.vie2}>
-      <View style={styles.addimage}><Text style={styles.text} >Adicionar Imagem+</Text></View>
-      <TextInput style={styles.input} placeholder='Digite sua Reclamação' />
-      <TouchableOpacity style={styles.btn}>
-        <Text style={styles.btnText}>ENVIAR</Text>
-      </TouchableOpacity>
+
     </View>
   )
 }

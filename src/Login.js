@@ -1,24 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, TextInput, TouchableOpacity, Text, Keyboard, StyleSheet, Image } from 'react-native'
+import { AuthContext } from './Context/AuthContext';
 
 
 
-export default function login({ setLogado, setCadastro }) {
+export default function login({ setCadastro }) {
+
+    const { Login, error } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    function Login() {
-        Keyboard.dismiss();
-        if (email == "kk@k" && senha == "321") {
-            setLogado(true);
-        }
-    }
-
-    function Cadastrar() {
-        setLogado(true);
-        setCadastro(true);
-    }
 
     return (
         <View style={styles.Container}>
@@ -32,10 +24,10 @@ export default function login({ setLogado, setCadastro }) {
                 value={senha}
                 placeholder='Senha' />
                 </View>
-            <TouchableOpacity style={styles.btn} onPress={Login}>
+            <TouchableOpacity style={styles.btn} onPress={() => Login(email, senha )}>
                 <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={Cadastrar}>
+            <TouchableOpacity>
                 <Text style={styles.btnText}>Cadastre-se</Text>
             </TouchableOpacity>
             <Image source={require("../assets/Pizzaburgerbebida.jpg")} style={styles.imagem2} />
@@ -57,10 +49,10 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#FFF',
         borderWidth: 1,
-        marginTop: 25,
+        marginTop: 20,
         marginLeft: 15,
         borderRadius: 15,
-        marginBottom: 15,
+        marginBottom: 10,
         textAlign: "center",
     },
     btn: {
@@ -102,7 +94,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F89A9A',
         width: '85%',
         borderRadius: 20,
-        height: 200,
+        height: 180,
         borderWidth: 1,
         marginLeft: 10,
     },
