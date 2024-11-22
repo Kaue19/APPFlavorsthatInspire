@@ -13,7 +13,7 @@ export default function login({ setCadastro }) {
     // UseEffect para escutar a mudança no error
     useEffect(() => {
         if (error) {
-            setErrorMessage("E-mail ou senha incorretos!");
+            setErrorMessage("E-MAIL OU SENHA INCORRETOS!");
         }
     }, [error]);
 
@@ -40,6 +40,7 @@ export default function login({ setCadastro }) {
                     placeholder='Senha' 
                     secureTextEntry
                 />
+                <Text style={styles.esqueceuasenha}>Esqueceu a Senha?</Text>
             </View>
             {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
             <TouchableOpacity style={styles.btn} onPress={handleLogin}>
@@ -73,12 +74,18 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: "center",
     },
+    esqueceuasenha:{
+        color: 'black',
+        fontSize: 20,
+        marginLeft: 20,
+        marginTop: 20
+    },
     btn: {
         width: 300,
         height: 55,
         backgroundColor: '#F5C185',
         borderRadius: 15,
-        marginTop: 15,
+        marginTop: 40,
         borderWidth: 1,
         marginLeft: 10,
     },
@@ -99,7 +106,7 @@ const styles = StyleSheet.create({
     titulo2: {
         fontSize: 30,
         fontWeight: "bold",
-        marginBottom: 15,
+        marginBottom: 20,
     },
     imagem2: {
         width: "60%",
@@ -115,11 +122,13 @@ const styles = StyleSheet.create({
         height: 180,
         borderWidth: 1,
         marginLeft: 10,
+        marginTop: -10
     },
     errorText: {
         color: 'red',
         fontSize: 16,
         fontWeight: 'bold',
-        marginTop: 10,
+        marginTop: 35,
+        marginBottom: -20
     }
 });
