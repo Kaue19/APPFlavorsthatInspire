@@ -1,58 +1,58 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, FlatList, Image, Text, StyleSheet, Dimensions, Button, TouchableOpacity, Pressable } from 'react-native';
+import { View, FlatList, Image, Text, StyleSheet, Dimensions, Button, TouchableOpacity, Modal, Pressable } from 'react-native';
 import Detalhe from "./Detalhe";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthContext } from './Context/AuthContext';
-
 
 const TelaHome = () => {
 
     const [colunas, setColunas] = useState(2);
     const [produtos, setProdutos] = useState([]);
     const [detalhe, setDetalhe] = useState(false);
-
     const [produto, setProduto] = useState(false);
+    
+    // Estado para controlar o modal
+    const [modalVisible, setModalVisible] = useState(false);
+    const [imagemSelecionada, setImagemSelecionada] = useState('');
 
-    const {addCarrinho } = useContext( AuthContext );
-    const {addFavoritar} = useContext( AuthContext );
+    const { addCarrinho } = useContext(AuthContext);
+    const { addFavoritar } = useContext(AuthContext);
 
     async function getProdutos() {
-        await fetch( process.env.EXPO_PUBLIC_URL + "api/Produto/GetAllProduto",
-            {
-                method: "GET"
-            }
-        )
-            .then(res => res.json())
-            .then(json => setProdutos(json))
-            .catch(err => console.log(err))
+        await fetch(process.env.EXPO_PUBLIC_URL + "api/Produto/GetAllProduto", {
+            method: "GET"
+        })
+        .then(res => res.json())
+        .then(json => setProdutos(json))
+        .catch(err => console.log(err))
     }
 
     useEffect(() => {
         getProdutos();
-    }, [])
+    }, []);
 
     const renderItem = ({ item }) => (
         <View style={styles.itemContainer}>
-            <Image style={styles.imagem} source={{ uri: item.produtoFoto }} />
+            <TouchableOpacity onPress={() => { setImagemSelecionada(item.produtoFoto); setModalVisible(true); }}>
+                <Image style={styles.imagem} source={{ uri: item.produtoFoto }} />
+            </TouchableOpacity>
             <Text style={styles.nome}>{item.produtoNome}</Text>
             <Text style={styles.preco}>R$: {item.produtoPreco}</Text>
-            <TouchableOpacity style={styles.btn} onPress={() => { setDetalhe(true); setProduto( item ); }}>
+            <TouchableOpacity style={styles.btn} onPress={() => { setDetalhe(true); setProduto(item); }}>
                 <Text style={styles.btnText}>Detalhes</Text>
             </TouchableOpacity>
             <View style={styles.caixaflex}>
-            <TouchableOpacity style={styles.btn2} onPress={() => addCarrinho( item ) }>
-                <Text style={styles.btnText}><MaterialCommunityIcons name="cart"  color={'black'} size={30} /></Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btn2} onPress={() => addFavoritar( item ) }>
-                <Text style={styles.btnText}><MaterialCommunityIcons name="heart" color={'black'} size={30} /></Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.btn2} onPress={() => addCarrinho(item)}>
+                    <Text style={styles.btnText}><MaterialCommunityIcons name="cart" color={'black'} size={30} /></Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btn2} onPress={() => addFavoritar(item)}>
+                    <Text style={styles.btnText}><MaterialCommunityIcons name="heart" color={'black'} size={30} /></Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
 
-
     return (
-
         <>
             {detalhe ?
                 <Detalhe item={produto} setDetalhe={setDetalhe} />
@@ -68,9 +68,24 @@ const TelaHome = () => {
                     />
                 </View>
             }
+
+            {/* Modal para exibir a imagem maior */}
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
+                            <Text style={styles.closeText}  onPress={() => setModalVisible(false)}>X</Text>
+                        </TouchableOpacity>
+                        <Image style={styles.modalImage} source={{ uri: imagemSelecionada }} />
+                    </View>
+                </View>
+            </Modal>
         </>
-
-
     );
 };
 
@@ -143,7 +158,38 @@ const styles = StyleSheet.create({
     },
     caixaflex: {
         flexDirection: 'row',
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)', // Semitransparente para o fundo
+    },
+    modalContent: {
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        position: 'relative',
+    },
+    modalImage: {
+        width: Dimensions.get('window').width * 0.8,
+        height: Dimensions.get('window').height * 0.5,
+        resizeMode: 'contain',
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        backgroundColor: 'rgba(255, 0, 0, 0.7)',
+        borderRadius: 20,
+        padding: 5,
+    },
+    closeText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
 });
 
 export default TelaHome;
