@@ -1,38 +1,56 @@
-import React, { useContext, useState } from 'react'
-import { View, TextInput, TouchableOpacity, Text, Keyboard, StyleSheet, Image } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { AuthContext } from './Context/AuthContext';
-
-
+import Cadastro from "./Cadastro";
 
 export default function login({ setCadastro }) {
-
     const { Login, error } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
+    // UseEffect para escutar a mudança no error
+    useEffect(() => {
+        if (error) {
+            setErrorMessage("E-mail ou senha incorretos!");
+        }
+    }, [error]);
+
+    const handleLogin = () => {
+        setErrorMessage("");  // Limpa a mensagem de erro anterior
+        Login(email, senha);
+    }
 
     return (
         <View style={styles.Container}>
             <Image source={require("../assets/logo.png")} style={styles.imagem} />
             <Text style={styles.titulo2}>LOGIN</Text>
             <View style={styles.Caixonainputs}>
-            <TextInput style={styles.inputs} onChangeText={(digitado) => setEmail(digitado)}
-                value={email}
-                placeholder='Email Ou Telefone' />
-            <TextInput style={styles.inputs}  onChangeText={(digitado) => setSenha(digitado)}
-                value={senha}
-                placeholder='Senha' />
-                </View>
-            <TouchableOpacity style={styles.btn} onPress={() => Login(email, senha )}>
+                <TextInput 
+                    style={styles.inputs} 
+                    onChangeText={(digitado) => setEmail(digitado)}
+                    value={email}
+                    placeholder='Email' 
+                />
+                <TextInput 
+                    style={styles.inputs}  
+                    onChangeText={(digitado) => setSenha(digitado)}
+                    value={senha}
+                    placeholder='Senha' 
+                    secureTextEntry
+                />
+            </View>
+            {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+            <TouchableOpacity style={styles.btn} onPress={handleLogin}>
                 <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={setCadastro}>
                 <Text style={styles.btnText}>Cadastre-se</Text>
             </TouchableOpacity>
             <Image source={require("../assets/Pizzaburgerbebida.jpg")} style={styles.imagem2} />
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -98,4 +116,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginLeft: 10,
     },
+    errorText: {
+        color: 'red',
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 10,
+    }
 });

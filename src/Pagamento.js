@@ -1,10 +1,13 @@
-import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Alert } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Alert, } from "react-native";
 import { useState } from "react";
 import Carrinho from "./Carrinho";
 
 export default function Pagamento() {
 
     
+    const handleCopyPixCode = () => {
+        Alert.alert('Código Pix copiado!', 'O código Pix foi copiado para a área de transferência.');
+      };
 
     const onPagamentoConcluido = () => {
         Alert.alert(
@@ -28,7 +31,7 @@ export default function Pagamento() {
                 <TouchableOpacity style={styles.btn}>
                  <Text style={styles.btnText} onPress={()=> setdetalhesdopedido(true)}>Detalhes do Pedido</Text>
             </TouchableOpacity>
-                <TouchableOpacity style={styles.btn2}>
+                <TouchableOpacity style={styles.btn2} onPress={handleCopyPixCode}>
                     <Text style={styles.btnText2}>Copiar Código Pix</Text>
                 </TouchableOpacity>
                 <TextInput style={styles.input} placeholder='Número do Cartão' />

@@ -14,9 +14,10 @@ const TelaHome = () => {
     const [produto, setProduto] = useState(false);
 
     const {addCarrinho } = useContext( AuthContext );
+    const {addFavoritar} = useContext( AuthContext );
 
     async function getProdutos() {
-        await fetch("http://10.133.22.9:5251/api/Produto/GetAllProduto",
+        await fetch( process.env.EXPO_PUBLIC_URL + "api/Produto/GetAllProduto",
             {
                 method: "GET"
             }
@@ -42,7 +43,7 @@ const TelaHome = () => {
             <TouchableOpacity style={styles.btn2} onPress={() => addCarrinho( item ) }>
                 <Text style={styles.btnText}><MaterialCommunityIcons name="cart"  color={'black'} size={30} /></Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn2}>
+            <TouchableOpacity style={styles.btn2} onPress={() => addFavoritar( item ) }>
                 <Text style={styles.btnText}><MaterialCommunityIcons name="heart" color={'black'} size={30} /></Text>
             </TouchableOpacity>
             </View>
@@ -76,13 +77,13 @@ const TelaHome = () => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     lista: {
         width: "95%",
         alignSelf: "center",
         justifyContent: 'space-around',
-        gap: 15
+        gap: 15,
     },
     itemContainer: {
         width: '48%',
@@ -96,20 +97,26 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        marginTop: 5,
+        marginBottom: 5,
+        borderWidth: 1
     },
     imagem: {
-        width: '100%',
+        width: '90%',
         height: 150,
         resizeMode: 'contain',
+        marginLeft: '5%',
     },
     nome: {
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
+        marginBottom: 5
     },
     preco: {
-        fontSize: 14,
+        fontSize: 15,
         textAlign: 'center',
+        marginBottom: 5
     },
     btnText: {
         textAlign: 'center',
@@ -117,20 +124,21 @@ const styles = StyleSheet.create({
     btn: {
         backgroundColor: "#E68F50",
         height: 30,
-        width: '100%',
+        width: '90%',
         borderWidth: 1,
         borderRadius: 10,
         marginBottom: 5,
         padding: 4,
+        marginLeft: '5%'
     },
     btn2: {
         backgroundColor: "#E68F50",
         height: 40,
-        width: '45%',
+        width: '40%',
         borderWidth: 1,
         borderRadius: 10,
         padding: 4,
-        marginLeft: 5,
+        marginLeft: 12,
         marginBottom: 5,
     },
     caixaflex: {

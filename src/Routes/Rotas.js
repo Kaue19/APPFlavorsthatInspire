@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -41,8 +41,15 @@ export default function Rotas() {
           headerTitleStyle: { color: "black" },
           tabBarActiveTintColor: "black",
           tabBarInactiveTintColor: "white",
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <Image
+              source={require("../../assets/logo.png")}  // Substitua o caminho com o caminho da sua logo
+              style={{ width: 70, height: 70, marginLeft: 10, marginBottom: 5 }} // Ajuste o tamanho e margens conforme necessário
+            />
+          ),
         }}>
-        <Tab.Screen name="Home" component={Home}
+        <Tab.Screen name="Home" component={Home} 
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (

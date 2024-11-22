@@ -1,56 +1,81 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList} from "react-native";
+import { AuthContext } from "./Context/AuthContext"
+import { useContext } from "react"
+
+
 
 export default function Favoritos() {
-  return (
-    <View style={styles.vie2}>
 
-    </View>
+  const  {Favoritar, Desfavoritar} = useContext( AuthContext );
+
+
+  return (
+    <FlatList
+        data={Favoritar}
+        renderItem={({ item }) => (
+          <View style={styles.cartItem}>
+            <Image style={styles.imagem} source={{ uri: item.produtoFoto }} />
+            <View style={styles.caixanomepreco}>
+            <Text style={styles.nome}>{item.produtoNome}</Text>
+            <TouchableOpacity onPress={() => Desfavoritar(item.produtoId)} style={styles.caixaremover}>
+            <Text style={styles.x}>X</Text>
+          </TouchableOpacity>
+            </View>
+          </View>
+        )}
+        keyExtractor={(item) => item.produtoId}
+      />
   )
 }
 
 const styles = StyleSheet.create({
-  input: {
-    width: '90%',
-    height: 55,
-    fontSize: 15,
-    borderWidth: 1,
-    padding: 15,
-    backgroundColor: '#D9D9D9',
-    borderRadius: 15,
-    marginTop: '5%',
-    marginBottom: 5,
-    marginLeft: 18
-  },
-  btn: {
-    width: '90%',
-    height: 55,
-    backgroundColor: '#DB7861',
-    borderRadius: 15,
-    marginTop: 10,
-    borderWidth: 1,
-    marginLeft: 18
+  imagem: {
+    width: '30%',
+    height: 100,
+    borderRadius: 20,
+    marginLeft: '5%',
+    marginTop: '10%',
+    marginBottom: 90,
   },
   btnText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    lineHeight: 50,
+    textAlign: 'center',
   },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: 'center'
+  btn:{
+    backgroundColor: "#E68F50",
+    height: 30,
+    width: 175,
+    marginLeft: '29%',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 30,
+   
   },
-  vie2: {
-    marginTop: -50
+  cartItem: {
+    flexDirection: 'row',
+    display: 'flex',
+    width: '80%'
   },
-  addimage: {
-   borderWidth: 1,
-   marginTop: 280,
-   height:40,
-   width: 200,
-   marginLeft: 100,
-   borderRadius: 15
+  caixanomepreco:{
+    marginLeft: 10,
+    marginTop: '10%',
+    marginBottom: 5,
+    marginRight: 30,
+  },
+  nome:{
+    fontSize: 25,
+  },
+  preco:{
+    fontSize: 25,
+  },
+  caixaremover:{
+    marginTop: 10,
+    width: 25,
+    height: 25,
+    backgroundColor: '#FF8B8B',
+    textAlign: 'center',
+    alignItems: 'center',
+    marginLeft: 40,
+    borderRadius: 40,
+    borderWidth: 1,
   },
 });
