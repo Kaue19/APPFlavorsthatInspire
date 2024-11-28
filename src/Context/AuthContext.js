@@ -6,8 +6,8 @@ function AuthProvider({ children }) {
     const [logado, setLogado] = useState(false);
     const [error, setError] = useState(false);
     const [user, setUser] = useState(false);
-    const [carrinho, setCarrinho] = useState([]);
-    const [Favoritar, setFavoritar] = useState([]);
+    const [carrinho, setCarrinho] = useState([]);  // Garantir que seja um array vazio
+    const [Favoritar, setFavoritar] = useState([]); // Garantir que seja um array vazio
 
     // Função para calcular o total do carrinho
     const calcularTotal = () => {
@@ -17,26 +17,48 @@ function AuthProvider({ children }) {
 
     // Função para adicionar item aos favoritos
     function addFavoritar(item) {
-        const newCart = [...Favoritar, item];
-        setFavoritar(newCart);
+        // Garantir que Favoritar seja um array
+        if (!Array.isArray(Favoritar)) {
+            setFavoritar([]);  // Caso Favoritar esteja com valor errado, reinicia para um array
+        }
+        
+        // Verifica se o item já está nos favoritos
+        const itemExistente = Favoritar.some(produto => produto.produtoId === item.produtoId);
+        if (itemExistente) {
+            alert('Produto já adicionado aos favoritos!'); // Exibe a mensagem
+        } else {
+            const newFavoritos = [...Favoritar, item]; // Adiciona o item aos favoritos
+            setFavoritar(newFavoritos);
+        }
     }
 
     // Função para adicionar item ao carrinho
     function addCarrinho(item) {
-        const newCart = [...carrinho, { ...item, quantidade: 1 }]; // Inicia com quantidade 1
-        setCarrinho(newCart);
+        // Garantir que carrinho seja um array
+        if (!Array.isArray(carrinho)) {
+            setCarrinho([]);  // Caso carrinho esteja com valor errado, reinicia para um array
+        }
+
+        // Verifica se o item já está no carrinho
+        const itemExistente = carrinho.some(produto => produto.produtoId === item.produtoId);
+        if (itemExistente) {
+            alert('Produto já adicionado ao carrinho!'); // Exibe a mensagem
+        } else {
+            const newCarrinho = [...carrinho, { ...item, quantidade: 1 }]; // Adiciona o item com quantidade 1
+            setCarrinho(newCarrinho);
+        }
     }
 
     // Função para remover item do carrinho
     function removerDoCarrinho(productId) {
-        const newCart = carrinho.filter(item => item.produtoId !== productId);
-        setCarrinho(newCart);
+        const newCarrinho = carrinho.filter(item => item.produtoId !== productId);
+        setCarrinho(newCarrinho);
     }
 
     // Função para remover item dos favoritos
     function Desfavoritar(favoriteId) {
-        const newCart = Favoritar.filter(item => item.produtoId !== favoriteId);
-        setFavoritar(newCart);
+        const newFavoritos = Favoritar.filter(item => item.produtoId !== favoriteId);
+        setFavoritar(newFavoritos);
     }
 
     // Função para atualizar a quantidade de um produto no carrinho

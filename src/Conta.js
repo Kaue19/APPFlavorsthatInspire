@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     aviso: {
         marginTop: 30,
         textAlign: 'center',
-        color: '#0e5c39',
+        color: '#fca030',
         fontSize: 20
     },
     avisoerro: {

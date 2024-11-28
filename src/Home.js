@@ -15,8 +15,7 @@ const TelaHome = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imagemSelecionada, setImagemSelecionada] = useState('');
 
-    const { addCarrinho } = useContext(AuthContext);
-    const { addFavoritar } = useContext(AuthContext);
+    const { addCarrinho, addFavoritar } = useContext(AuthContext);
 
     async function getProdutos() {
         await fetch(process.env.EXPO_PUBLIC_URL + "api/Produto/GetAllProduto", {
@@ -42,10 +41,25 @@ const TelaHome = () => {
                 <Text style={styles.btnText}>Detalhes</Text>
             </TouchableOpacity>
             <View style={styles.caixaflex}>
-                <TouchableOpacity style={styles.btn2} onPress={() => addCarrinho(item)}>
+                {/* Verifique a presença do item antes de adicionar ao carrinho */}
+                <TouchableOpacity style={styles.btn2} onPress={() => {
+                    if (item && item.produtoId) {
+                        addCarrinho(item); 
+                    } else {
+                        alert("Erro ao adicionar o item ao carrinho.");
+                    }
+                }}>
                     <Text style={styles.btnText}><MaterialCommunityIcons name="cart" color={'black'} size={30} /></Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn2} onPress={() => addFavoritar(item)}>
+
+                {/* Verifique a presença do item antes de adicionar aos favoritos */}
+                <TouchableOpacity style={styles.btn2} onPress={() => {
+                    if (item && item.produtoId) {
+                        addFavoritar(item); 
+                    } else {
+                        alert("Erro ao adicionar o item aos favoritos.");
+                    }
+                }}>
                     <Text style={styles.btnText}><MaterialCommunityIcons name="heart" color={'black'} size={30} /></Text>
                 </TouchableOpacity>
             </View>

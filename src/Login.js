@@ -42,13 +42,13 @@ export default function login({ setCadastro }) {
                 />
                 <Text style={styles.esqueceuasenha}>Esqueceu a Senha?</Text>
             </View>
-            {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
             <TouchableOpacity style={styles.btn} onPress={handleLogin}>
                 <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={setCadastro}>
                 <Text style={styles.btnText}>Cadastre-se</Text>
             </TouchableOpacity>
+            {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
             <Image source={require("../assets/Pizzaburgerbebida.jpg")} style={styles.imagem2} />
         </View>
     );
@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 20,
         marginLeft: 20,
-        marginTop: 20
+        marginTop: 10
     },
     btn: {
         width: 300,
         height: 55,
         backgroundColor: '#F5C185',
         borderRadius: 15,
-        marginTop: 40,
+        marginTop: 50,
         borderWidth: 1,
         marginLeft: 10,
     },
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F89A9A',
         width: '85%',
         borderRadius: 20,
-        height: 180,
+        height: 170,
         borderWidth: 1,
         marginLeft: 10,
         marginTop: -10
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 16,
         fontWeight: 'bold',
-        marginTop: 35,
-        marginBottom: -20
+        marginTop: 10,
     }
 });
