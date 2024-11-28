@@ -11,11 +11,11 @@ export default function Carrinho({ setdetalhesdopedido }) {
   };
 
   const aumentarQuantidade = (produtoId) => {
-    atualizarQuantidade(produtoId, 1); 
+    atualizarQuantidade(produtoId, 1);
   };
 
   const diminuirQuantidade = (produtoId) => {
-    atualizarQuantidade(produtoId, -1); 
+    atualizarQuantidade(produtoId, -1);
   };
 
   return (
@@ -56,7 +56,7 @@ export default function Carrinho({ setdetalhesdopedido }) {
           </View>
         )}
         keyExtractor={(item) => item.produtoId}
-        contentContainerStyle={styles.flatListContentContainer} // Ajuste o estilo da FlatList
+        contentContainerStyle={styles.flatListContentContainer}
       />
     </View>
   );
@@ -64,14 +64,14 @@ export default function Carrinho({ setdetalhesdopedido }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
   },
   imagem: {
     width: 100,
     height: 100,
     borderRadius: 10,
     marginLeft: 10,
-    marginTop: 5, 
+    marginTop: 5,
   },
   btnText: {
     textAlign: 'center',
@@ -92,15 +92,15 @@ const styles = StyleSheet.create({
   },
   cartItem: {
     flexDirection: 'row',
-    alignItems: 'center', 
-    justifyContent: 'space-between', 
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginVertical: 20,
     paddingHorizontal: 10,
   },
   caixanomepreco: {
     flex: 1,
     marginLeft: 20,
-    justifyContent: 'center', 
+    justifyContent: 'center',
   },
   nome: {
     fontSize: 18,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   contador: {
     flexDirection: 'row',
-    alignItems: 'center', 
+    alignItems: 'center',
     marginTop: 5,
   },
   btnAlterarQuantidade: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 30,
     height: 30,
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center',
   },
   quantidade: {
@@ -134,15 +134,15 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     backgroundColor: '#FF8B8B',
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
     borderWidth: 1,
-    marginLeft: 26, 
+    marginLeft: 26,
   },
   fechartotalflex: {
     flexDirection: 'row',
-    alignItems: 'center', 
+    alignItems: 'center',
     marginHorizontal: 10,
   },
   total: {
@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   flatListContentContainer: {
-    paddingBottom: 20, 
+    paddingBottom: 20,
   },
 });

@@ -23,7 +23,7 @@ export default function Rotas() {
 
   const [cadastro, setCadastro] = useState(false);
 
-  if (!logado && !cadastro ) {
+  if (!logado && !cadastro) {
     return (<Login setCadastro={setCadastro} />)
   }
 
@@ -44,12 +44,12 @@ export default function Rotas() {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <Image
-              source={require("../../assets/logo.png")}  // Substitua o caminho com o caminho da sua logo
-              style={{ width: 70, height: 70, marginLeft: 10, marginBottom: 5 }} // Ajuste o tamanho e margens conforme necessário
+              source={require("../../assets/logo.png")}
+              style={{ width: 70, height: 70, marginLeft: 10, marginBottom: 5 }}
             />
           ),
         }}>
-        <Tab.Screen name="Home" component={Home} 
+        <Tab.Screen name="Home" component={Home}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (

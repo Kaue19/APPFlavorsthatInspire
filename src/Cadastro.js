@@ -14,19 +14,19 @@ export default function Cadastro({ setCadastro }) {
             Alert.alert('Erro', 'As senhas não coincidem');
             return;
         }
-    
+
         const dadosCadastro = {
             nomeUsuario: nome.trim(),
             email: email.trim(),
             telefone: telefone.trim(),
             endereco: endereco.trim(),
             senha: senha.trim(),
-            confirmarSenha: confirmarSenha.trim() 
+            confirmarSenha: confirmarSenha.trim()
         };
-    
+
         try {
             const API_URL = process.env.EXPO_PUBLIC_URL + 'api/Usuario/Cadastro';
-    
+
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
@@ -34,14 +34,14 @@ export default function Cadastro({ setCadastro }) {
                 },
                 body: JSON.stringify(dadosCadastro),
             });
-    
+
             if (response.ok) {
                 const data = await response.json();
                 Alert.alert('Sucesso', 'Cadastro realizado com sucesso!');
                 setCadastro(false);
             } else {
                 const errorText = await response.text();
-                console.log("Texto de erro:", errorText); 
+                console.log("Texto de erro:", errorText);
                 Alert.alert('Erro', errorText || 'Ocorreu um erro ao cadastrar');
             }
         } catch (error) {
@@ -49,7 +49,7 @@ export default function Cadastro({ setCadastro }) {
             Alert.alert('Erro', 'Erro de rede ou servidor');
         }
     }
-    
+
     function Voltar() {
         setCadastro(false);
     }

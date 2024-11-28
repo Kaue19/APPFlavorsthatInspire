@@ -17,15 +17,15 @@ export default function Conta() {
     const [error, setError] = useState(false);
 
 
-    useEffect( () => {
-        if( user ) {
-            setNome( user.nomeUsuario );
-            setEmail( user.email );
-            setEndereco( user.endereco );
-            setTelefone( user.telefone );
-            setSenha( user.senha );
+    useEffect(() => {
+        if (user) {
+            setNome(user.nomeUsuario);
+            setEmail(user.email);
+            setEndereco(user.endereco);
+            setTelefone(user.telefone);
+            setSenha(user.senha);
         }
-    }, [user] );
+    }, [user]);
 
 
     async function editar() {
@@ -45,11 +45,11 @@ export default function Conta() {
             })
         })
             .then(res => res.json())
-            .then(json => { 
-                setEdit( true );
-                setUser( json );
-             } )
-            .catch(err => setError( true ) )
+            .then(json => {
+                setEdit(true);
+                setUser(json);
+            })
+            .catch(err => setError(true))
     }
 
     return (
@@ -77,11 +77,11 @@ export default function Conta() {
                 />
 
             </View>
-            <TouchableOpacity style={styles.btn} onPress={ () => editar() }>
+            <TouchableOpacity style={styles.btn} onPress={() => editar()}>
                 <Text style={styles.btnText}>Editar</Text>
             </TouchableOpacity>
             {edit == true && <Text style={styles.aviso}>Informações Atualizadas com Sucesso!!</Text>}
-            {error && <Text  style={styles.avisoerro}>Erro, não foi possível atualizar as informações</Text>}
+            {error && <Text style={styles.avisoerro}>Erro, não foi possível atualizar as informações</Text>}
         </View>
     )
 }

@@ -10,7 +10,7 @@ export default function login({ setCadastro }) {
     const [senha, setSenha] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    // UseEffect para escutar a mudança no error
+
     useEffect(() => {
         if (error) {
             setErrorMessage("E-MAIL OU SENHA INCORRETOS!");
@@ -18,7 +18,7 @@ export default function login({ setCadastro }) {
     }, [error]);
 
     const handleLogin = () => {
-        setErrorMessage("");  // Limpa a mensagem de erro anterior
+        setErrorMessage("");
         Login(email, senha);
     }
 
@@ -27,17 +27,17 @@ export default function login({ setCadastro }) {
             <Image source={require("../assets/logo.png")} style={styles.imagem} />
             <Text style={styles.titulo2}>LOGIN</Text>
             <View style={styles.Caixonainputs}>
-                <TextInput 
-                    style={styles.inputs} 
+                <TextInput
+                    style={styles.inputs}
                     onChangeText={(digitado) => setEmail(digitado)}
                     value={email}
-                    placeholder='Email' 
+                    placeholder='Email'
                 />
-                <TextInput 
-                    style={styles.inputs}  
+                <TextInput
+                    style={styles.inputs}
                     onChangeText={(digitado) => setSenha(digitado)}
                     value={senha}
-                    placeholder='Senha' 
+                    placeholder='Senha'
                     secureTextEntry
                 />
                 <Text style={styles.esqueceuasenha}>Esqueceu a Senha?</Text>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: "center",
     },
-    esqueceuasenha:{
+    esqueceuasenha: {
         color: 'black',
         fontSize: 20,
         marginLeft: 20,

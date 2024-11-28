@@ -26,13 +26,13 @@ export default function Local() {
     try {
       const resultado = await Geocoding.geocodeAsync(searchQuery);
       if (resultado.length > 0) {
-        const { latitude, longitude } = resultado[0]; 
+        const { latitude, longitude } = resultado[0];
         setSearchResult({ latitude, longitude });
-        
-        
+
+
         mapRef.current?.animateCamera({
           center: { latitude, longitude },
-          zoom: 15, 
+          zoom: 15,
         });
       } else {
         alert('Local não encontrado!');
@@ -69,14 +69,14 @@ export default function Local() {
           style={styles.searchInput}
           value={searchQuery}
           onChangeText={setSearchQuery}
-          onSubmitEditing={PesquisarLocal}  
+          onSubmitEditing={PesquisarLocal}
         />
         <MaterialCommunityIcons
           name="map-search"
           color={'black'}
           size={20}
           style={styles.searchIcon}
-          onPress={PesquisarLocal} 
+          onPress={PesquisarLocal}
         />
       </View>
 
@@ -106,7 +106,7 @@ export default function Local() {
                 longitude: searchResult.longitude,
               }}
               title="Local Pesquisado"
-              pinColor="blue" 
+              pinColor="blue"
             />
           )}
         </MapView>

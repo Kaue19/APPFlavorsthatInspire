@@ -10,8 +10,8 @@ const TelaHome = () => {
     const [produtos, setProdutos] = useState([]);
     const [detalhe, setDetalhe] = useState(false);
     const [produto, setProduto] = useState(false);
-    
-    // Estado para controlar o modal
+
+
     const [modalVisible, setModalVisible] = useState(false);
     const [imagemSelecionada, setImagemSelecionada] = useState('');
 
@@ -21,9 +21,9 @@ const TelaHome = () => {
         await fetch(process.env.EXPO_PUBLIC_URL + "api/Produto/GetAllProduto", {
             method: "GET"
         })
-        .then(res => res.json())
-        .then(json => setProdutos(json))
-        .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(json => setProdutos(json))
+            .catch(err => console.log(err))
     }
 
     useEffect(() => {
@@ -41,10 +41,10 @@ const TelaHome = () => {
                 <Text style={styles.btnText}>Detalhes</Text>
             </TouchableOpacity>
             <View style={styles.caixaflex}>
-                {/* Verifique a presença do item antes de adicionar ao carrinho */}
+
                 <TouchableOpacity style={styles.btn2} onPress={() => {
                     if (item && item.produtoId) {
-                        addCarrinho(item); 
+                        addCarrinho(item);
                     } else {
                         alert("Erro ao adicionar o item ao carrinho.");
                     }
@@ -52,10 +52,10 @@ const TelaHome = () => {
                     <Text style={styles.btnText}><MaterialCommunityIcons name="cart" color={'black'} size={30} /></Text>
                 </TouchableOpacity>
 
-                {/* Verifique a presença do item antes de adicionar aos favoritos */}
+
                 <TouchableOpacity style={styles.btn2} onPress={() => {
                     if (item && item.produtoId) {
-                        addFavoritar(item); 
+                        addFavoritar(item);
                     } else {
                         alert("Erro ao adicionar o item aos favoritos.");
                     }
@@ -83,7 +83,7 @@ const TelaHome = () => {
                 </View>
             }
 
-            {/* Modal para exibir a imagem maior */}
+
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -93,7 +93,7 @@ const TelaHome = () => {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-                            <Text style={styles.closeText}  onPress={() => setModalVisible(false)}>X</Text>
+                            <Text style={styles.closeText} onPress={() => setModalVisible(false)}>X</Text>
                         </TouchableOpacity>
                         <Image style={styles.modalImage} source={{ uri: imagemSelecionada }} />
                     </View>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.7)', // Semitransparente para o fundo
+        backgroundColor: 'rgba(0,0,0,0.7)',
     },
     modalContent: {
         backgroundColor: '#fff',

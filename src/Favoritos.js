@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import { AuthContext } from "./Context/AuthContext"
 import { useContext } from "react"
 
@@ -6,25 +6,25 @@ import { useContext } from "react"
 
 export default function Favoritos() {
 
-  const  {Favoritar, Desfavoritar} = useContext( AuthContext );
+  const { Favoritar, Desfavoritar } = useContext(AuthContext);
 
 
   return (
     <FlatList
-        data={Favoritar}
-        renderItem={({ item }) => (
-          <View style={styles.cartItem}>
-            <Image style={styles.imagem} source={{ uri: item.produtoFoto }} />
-            <View style={styles.caixanomepreco}>
+      data={Favoritar}
+      renderItem={({ item }) => (
+        <View style={styles.cartItem}>
+          <Image style={styles.imagem} source={{ uri: item.produtoFoto }} />
+          <View style={styles.caixanomepreco}>
             <Text style={styles.nome}>{item.produtoNome}</Text>
             <TouchableOpacity onPress={() => Desfavoritar(item.produtoId)} style={styles.caixaremover}>
-            <Text style={styles.x}>X</Text>
-          </TouchableOpacity>
-            </View>
+              <Text style={styles.x}>X</Text>
+            </TouchableOpacity>
           </View>
-        )}
-        keyExtractor={(item) => item.produtoId}
-      />
+        </View>
+      )}
+      keyExtractor={(item) => item.produtoId}
+    />
   )
 }
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   btnText: {
     textAlign: 'center',
   },
-  btn:{
+  btn: {
     backgroundColor: "#E68F50",
     height: 30,
     width: 175,
@@ -48,26 +48,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 30,
-   
+
   },
   cartItem: {
     flexDirection: 'row',
     display: 'flex',
     width: '80%'
   },
-  caixanomepreco:{
+  caixanomepreco: {
     marginLeft: 10,
     marginTop: '10%',
     marginBottom: 5,
     marginRight: 30,
   },
-  nome:{
+  nome: {
     fontSize: 25,
   },
-  preco:{
+  preco: {
     fontSize: 25,
   },
-  caixaremover:{
+  caixaremover: {
     marginTop: 10,
     width: 25,
     height: 25,
